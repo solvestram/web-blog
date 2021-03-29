@@ -1,0 +1,13 @@
+/* turn off sizing of textarea by user */
+textarea {
+    resize: none;
+ }
+
+/* to limit width in some pages */
+.width-limiter{
+    max-width: 680px;
+}
+
+.comment{
+    word-wrap: break-word;
+}

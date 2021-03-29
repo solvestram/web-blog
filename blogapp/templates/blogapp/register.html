@@ -1,0 +1,44 @@
+{% extends "blogapp/layout.html" %}
+
+{% block main %}
+
+<div class="container width-limiter">
+    <div class="mt-5">
+        <form action="{% url 'register' %}" method='post'>
+            {% csrf_token %}
+            <div class="row-auto mb-3">
+                <input type="text" class="form-control" name="inputFirstName" id="inputFirstName"
+                    placeholder="First name">
+            </div>
+            <div class="row-auto mb-3">
+                <input type="text" class="form-control" name="inputLastName" id="inputLastName"
+                    placeholder="Last name (optional)">
+            </div>
+            <div class="row-auto mb-3">
+                <input type="text" class="form-control" name='inputUsername' id="inputUsername" placeholder="Username">
+            </div>
+            <div class="row-auto mb-3">
+                <input type="email" class="form-control" name='inputEmail' id="inputEmail"
+                    placeholder="Email (optional)">
+            </div>
+            <div class="row-auto mb-3">
+                <input type="password" class="form-control" name='inputPassword' id="inputPassword"
+                    placeholder="Password">
+            </div>
+            <div class="row-auto mb-3">
+                <input type="password" class="form-control" name='inputPasswordConfirm' id="inputPasswordConfirm"
+                    placeholder="Password (again)">
+            </div>
+            <div class="row-auto mb-3">
+                <input type="checkbox" class="form-check-input" name='canWriteBlogs' id="canWriteBlogs" value='on'>
+                <label for="canWriteBlogs">Can Write Blogs</label>
+            </div>
+            <div class="row-auto mb-3 text-center">
+                <button type="submit" class="btn btn-primary mb-3">Register</button>
+            </div>
+        </form>
+        <small>Already have an account? <a href="{% url 'login' %}">Log In here.</a></small>
+    </div>
+</div>
+
+{% endblock %}

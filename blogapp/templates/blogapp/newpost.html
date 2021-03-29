@@ -1,0 +1,29 @@
+{% extends "blogapp/layout.html" %}
+
+{% block main %}
+
+<div class="container width-limiter">
+    <div class="mt-5">
+
+        <form action="{% url 'newpost' %}" method='post'>
+            {% csrf_token %}
+            <div class="row-auto mb-3">
+                <input type="text" class="form-control" name='inputTitle' id="inputTitle" placeholder="Title"
+                    value="{{title}}">
+            </div>
+            <div class="row-auto mb-3">
+                <input type="text" class="form-control" name='inputSubtitle' id="inputSubtitle"
+                    placeholder="Subtitle (optional)" value="{{subtitle}}">
+            </div>
+            <div class="row-auto mb-3">
+                <label for="newPostBody" class="form-label">Post content</label>
+                <textarea class="form-control" name="newPostBody" id="newPostBody" rows="20">{{body}}</textarea>
+            </div>
+            <div class="row-auto mb-3 text-center">
+                <button type="submit" class="btn btn-primary mb-3">Create post</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "blogapp/layout.html" %}
+
+{% block main %}
+
+<div class="container width-limiter">
+    <!--Page content-->
+    <div class="row">
+        <div class='post-header text-center my-3'>
+            <h1>{{page_content.post_title}}</h1>
+            <h4>{{page_content.post_subtitle}}</h4>
+            <div class="post-info">
+                <span class='post-author'><small>{{page_content.post_author}}</small></span> | <span
+                    class='post-time'><small>{{page_content.post_time}}</small></span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="post-body px-5 mt-3">
+            {{page_content.post_body_html | safe}}
+        </div>
+    </div>
+
+    <!--Comment section-->
+    <div class="row">
+        <div class="comments px-5 mt-3 mb-5">
+            <hr>
+            <span class='fs-3'><strong>Comments</strong></span>
+            {% if user.is_authenticated %}
+            <div class="newComment">
+                <form action="{% url 'page' page_id %}" method='post'>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="newCommentTextArea" class="form-label">New comment</label>
+                        <textarea class="form-control" id="newCommentTextArea" name="newCommentText"
+                            rows="4"></textarea>
+                    </div>
+                    <div class="text-end">
+                        <button type='submit' class="btn btn-dark">Add comment</button>
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+            {% if comments %}
+            {% for comment in comments %}
+            <div class="comment border rounded-3 p-4 my-3">
+                <div class="commentHeader">
+                    <span class='comment author fs-4'><strong>{{ comment.comment_author }}</strong></span>
+                    (<span class='comment time'><small>{{ comment.comment_time }}</small></span>)
+                </div>
+                <div class="commentBody mt-2">
+                    <p>{{ comment.comment_body }}</p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="no_comments"><em>There are no comments yet...</em></div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
